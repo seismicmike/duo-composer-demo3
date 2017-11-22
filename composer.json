@@ -99,6 +99,11 @@
         ".htaccess",
         "web.config"
       ]
+    },
+    "patches": {
+      "drupal/address": {
+        "Fix the locality.name PlainFormatter": "https://www.drupal.org/files/issues/locality-name-data-missed-plainformater-2881391-1.patch"
+      }
     }
   },
   "config": {
