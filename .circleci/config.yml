@@ -126,6 +126,23 @@ jobs:
                 name: remove transient test fixtures
                 command: ./.circleci/scripts/pantheon/09-cleanup-fixtures
 
+    backstop:
+        docker:
+            - image: quay.io/stevector/pantheon-ci-testing:master
+        working_directory: ~/example_wordpress_composer
+        steps:
+            - checkout
+            - run:
+                name: dependencies
+                # Set TERMINUS_ENV and related environment variables.
+                # https://github.com/stevector/docker-build-tools-ci/blob/master/dockerfiles/pantheon-ci-testing/scripts/set-up-global-vars.sh
+                command: /build-tools-ci/scripts/set-up-global-vars.sh
+            - run:
+                name: run-backstop
+                command: cd backstop && ./run-backstop.sh
+            - store_artifacts:
+                path: /tmp/artifacts
+                destination: artifacts
     # TODO:
     # 04-merge-master
     # 09-cleanup-fixtures
@@ -137,4 +154,5 @@ workflows:
       # Install dev dependencies and do simple tests (sniff, unit tests, etc.)
       - build
       # Build deploy and test on target platform
-      - build_deploy_and_test
+#      - build_deploy_and_test
+      - backstop
