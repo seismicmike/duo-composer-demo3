@@ -2,6 +2,8 @@
 
 set -e
 
+# Pointless comment.
+
 # Make artifacts directory
 CIRCLE_ARTIFACTS='artifacts'
 CIRCLE_ARTIFACTS_DIR='/tmp/artifacts'
